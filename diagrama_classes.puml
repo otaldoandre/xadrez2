@@ -1,0 +1,102 @@
+@startuml
+
+class Gerenciador {
+  +main(String[])
+  -salvar(Jogo)
+  static debug: boolean
+}
+
+class Jogo {
+  -jogador: Jogador[]
+  -tabuleiro: Tabuleiro
+  -pecas: Peca[]
+  +iniciar()
+  +iniciar(caminho)
+  -criaPartida()
+  -criaPartida(caminho)
+  -partida(ja)
+  -recebeJogada(ja)
+  -realizaJogada(j)
+  +resfreshScreen()
+  +registroJogo()
+}
+
+class Jogador {
+  +nome: String
+  +cor: int
+  -pecas: Peca[]
+  +setPecas(ps)
+  +informaJogada()
+  +pecasCapturadas()
+}
+
+class Tabuleiro {
+  +casas: Casa[][]
+  +geraCaminho(c)
+  +setCasa(y,x,p)
+  +setCasa(c,p)
+  +getCasa(y,x)
+  +getPeca(y,x)
+  +casasDoCaminho()
+  +desenho()
+}
+
+class Casa {
+  +cor: int
+  +ocupante: Peca
+}
+
+class Jogada {
+  +autor: Jogador
+  +casaInicial: Casa
+  +casaFinal: Casa
+  +caminho: Caminho
+  +ehValida(t)
+  +ehXeque()
+  +ehXequeMate()
+}
+
+class Caminho {
+  -lista: Casa[]
+  +casaInicial()
+  +casaFinal()
+  +estaLivre()
+}
+
+abstract class Peca {
+  +cor: int
+  +jogador: Jogador
+  +Desenho()
+  +movimentoValido()
+  +caminho()
+}
+
+class Peao
+class Torre
+class Bispo
+class Cavalo
+class Rainha
+class Rei
+
+Peca <|-- Peao
+Peca <|-- Torre
+Peca <|-- Bispo
+Peca <|-- Cavalo
+Peca <|-- Rainha
+Peca <|-- Rei
+
+Jogo --> Jogador
+Jogo --> Tabuleiro
+Jogo --> Peca
+Jogo --> Jogada
+Tabuleiro --> Casa
+Tabuleiro --> Caminho
+Casa --> Peca
+Jogador --> Peca
+Jogada --> Jogador
+Jogada --> Casa
+Jogada --> Caminho
+Caminho --> Casa
+Peca --> Jogador
+
+@enduml
