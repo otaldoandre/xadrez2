@@ -85,18 +85,19 @@ Peca <|-- Cavalo
 Peca <|-- Rainha
 Peca <|-- Rei
 
-Jogo --> Jogador
-Jogo --> Tabuleiro
-Jogo --> Peca
-Jogo --> Jogada
-Tabuleiro --> Casa
-Tabuleiro --> Caminho
-Casa --> Peca
-Jogador --> Peca
-Jogada --> Jogador
-Jogada --> Casa
-Jogada --> Caminho
-Caminho --> Casa
-Peca --> Jogador
+' Relações com agregação, composição e associação
+Jogo o-- "2" Jogador : agregação
+Jogo *-- Tabuleiro : composição
+Jogo o-- "32" Peca : agregação
+Jogo ..> Jogada : usa
+Tabuleiro *-- "8x8" Casa : composição
+Tabuleiro ..> Caminho : usa
+Casa o-- Peca : agregação
+Jogador o-- "*" Peca : agregação
+Jogada --> Jogador : associação
+Jogada --> Casa : associação
+Jogada *-- Caminho : composição
+Caminho o-- "*" Casa : agregação
+Peca --> Jogador : associação
 
 @enduml
